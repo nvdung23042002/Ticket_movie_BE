@@ -10,7 +10,7 @@ import com.webmovieticket.payload.response.JwtResponse;
 import com.webmovieticket.payload.response.MessageResponse;
 import com.webmovieticket.repository.RoleRepository;
 import com.webmovieticket.repository.UserRepository;
-import com.webmovieticket.service.UserDetailsImpl;
+import com.webmovieticket.service.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

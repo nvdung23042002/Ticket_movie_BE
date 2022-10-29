@@ -1,6 +1,6 @@
 package com.webmovieticket.jwt;
 
-import com.webmovieticket.service.UserDetailsImpl;
+import com.webmovieticket.service.impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
