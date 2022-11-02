@@ -1,12 +1,16 @@
 package com.webmovieticket.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "movies")
 public class Movies extends BaseModel {
@@ -28,10 +32,12 @@ public class Movies extends BaseModel {
     @Column(name = "music")
     private String music;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "lang")
     private String lang;
 
+    @Column(name = "trailerUrl")
+    private String trailerUrl;
 }

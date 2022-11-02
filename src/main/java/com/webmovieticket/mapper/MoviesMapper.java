@@ -22,6 +22,7 @@ public class MoviesMapper {
         result.setMusic(movies.getMusic());
         result.setDescription(movies.getDescription());
         result.setLang(movies.getLang());
+        result.setTrailerUrl(movies.getTrailerUrl());
 
         return result;
     }
@@ -37,6 +38,7 @@ public class MoviesMapper {
         result.setMusic(moviesDTO.getMusic());
         result.setDescription(moviesDTO.getDescription());
         result.setLang(moviesDTO.getLang());
+        result.setTrailerUrl(moviesDTO.getTrailerUrl());
 
         return result;
     }
@@ -50,6 +52,7 @@ public class MoviesMapper {
         oldMovies.setMusic(newMovies.getMusic());
         oldMovies.setDescription(newMovies.getDescription());
         oldMovies.setLang(newMovies.getLang());
+        oldMovies.setTrailerUrl(newMovies.getTrailerUrl());
 
         return MoviesMapper.this.toDto(oldMovies);
     }
