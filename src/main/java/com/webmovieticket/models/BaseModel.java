@@ -1,6 +1,9 @@
 package com.webmovieticket.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -11,87 +14,24 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
+@SuperBuilder(toBuilder = true)
 @MappedSuperclass
-@EntityListeners({AuditingEntityListener.class})
-public abstract class BaseModel implements Serializable {
-
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Version
-    private Integer version;
-
     @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @CreatedBy
-    private String createdBy;
+    private Date createdAt;
 
     @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    private Date updatedAt;
 
-    @LastModifiedBy
-    private String lastModifiedBy;
+    private Date deletedAt;
 
-    @Column(name = "deleted")
-    private boolean deleted = false;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
+    private Boolean isActive;
 }

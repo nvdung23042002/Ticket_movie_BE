@@ -1,7 +1,7 @@
 package com.webmovieticket.controller;
 
 import com.webmovieticket.jwt.JwtUtils;
-import com.webmovieticket.models.ERole;
+import com.webmovieticket.models.enums.ERole;
 import com.webmovieticket.models.Role;
 import com.webmovieticket.models.User;
 import com.webmovieticket.payload.request.LoginRequest;
@@ -10,7 +10,7 @@ import com.webmovieticket.payload.response.JwtResponse;
 import com.webmovieticket.payload.response.MessageResponse;
 import com.webmovieticket.repository.RoleRepository;
 import com.webmovieticket.repository.UserRepository;
-import com.webmovieticket.service.impl.UserDetailsImpl;
+import com.webmovieticket.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

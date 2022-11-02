@@ -2,7 +2,7 @@ package com.webmovieticket.configuration;
 
 import com.webmovieticket.jwt.AuthEntryPointJwt;
 import com.webmovieticket.jwt.AuthTokenFilter;
-import com.webmovieticket.service.impl.UserDetailsServiceImpl;
+import com.webmovieticket.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,6 +64,8 @@ public class SecurityConfiguration {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/v*/auth/**").permitAll()
+                .antMatchers("/api/v*/movies/**").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .anyRequest()
                 .authenticated();
 

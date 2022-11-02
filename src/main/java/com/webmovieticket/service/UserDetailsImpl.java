@@ -1,4 +1,4 @@
-package com.webmovieticket.service.impl;
+package com.webmovieticket.service;
 
 import com.webmovieticket.models.User;
 import org.springframework.security.core.GrantedAuthority;

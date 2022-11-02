@@ -1,8 +1,7 @@
-package com.webmovieticket.service.impl;
+package com.webmovieticket.service;
 
 import com.webmovieticket.models.User;
 import com.webmovieticket.repository.UserRepository;
-import com.webmovieticket.service.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

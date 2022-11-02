@@ -1,6 +1,6 @@
 package com.webmovieticket.jwt;
 
-import com.webmovieticket.service.impl.UserDetailsServiceImpl;
+import com.webmovieticket.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

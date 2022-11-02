@@ -1,5 +1,7 @@
 package com.webmovieticket.models;
 
+import com.webmovieticket.models.enums.ERole;
+
 import javax.persistence.*;
 
 @Entity

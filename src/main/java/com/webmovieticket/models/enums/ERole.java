@@ -1,4 +1,4 @@
-package com.webmovieticket.models;
+package com.webmovieticket.models.enums;
 
 public enum ERole {
     ROLE_USER,
