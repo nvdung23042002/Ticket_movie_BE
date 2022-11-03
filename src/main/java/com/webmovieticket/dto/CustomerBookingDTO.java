@@ -5,8 +5,6 @@ import java.util.Date;
 public class CustomerBookingDTO {
     private Long id;
 
-    private Long fk_show_id;
-
     private String seat_id;
 
     private String seat_name;
@@ -18,10 +16,6 @@ public class CustomerBookingDTO {
     private String show_time;
 
     private Date booking_dt;
-
-    private Long fk_cust_id;
-
-    private Long fk_movie_id;
 
     private String convenience;
 
@@ -35,14 +29,6 @@ public class CustomerBookingDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getFk_show_id() {
-        return fk_show_id;
-    }
-
-    public void setFk_show_id(Long fk_show_id) {
-        this.fk_show_id = fk_show_id;
     }
 
     public String getSeat_id() {
@@ -91,22 +77,6 @@ public class CustomerBookingDTO {
 
     public void setBooking_dt(Date booking_dt) {
         this.booking_dt = booking_dt;
-    }
-
-    public Long getFk_cust_id() {
-        return fk_cust_id;
-    }
-
-    public void setFk_cust_id(Long fk_cust_id) {
-        this.fk_cust_id = fk_cust_id;
-    }
-
-    public Long getFk_movie_id() {
-        return fk_movie_id;
-    }
-
-    public void setFk_movie_id(Long fk_movie_id) {
-        this.fk_movie_id = fk_movie_id;
     }
 
     public String getConvenience() {

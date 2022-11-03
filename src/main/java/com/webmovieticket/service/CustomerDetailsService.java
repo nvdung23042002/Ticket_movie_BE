@@ -7,11 +7,7 @@ import com.webmovieticket.repository.CustomerDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Column;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,11 +21,11 @@ public class CustomerDetailsService {
 
     public List<CustomerDetailsDTO> findAll() {
         return customerDetailsRepository.findAll().stream().map(
-                customerDetails -> customerDetailsMapper.returnDto(customerDetails)).collect(Collectors.toList());
+                customerDetails -> customerDetailsMapper.returnDTO(customerDetails)).collect(Collectors.toList());
     }
 
     public CustomerDetailsDTO findById(Long cust_id) {
-        return customerDetailsMapper.returnDto(customerDetailsRepository.findById(cust_id)
+        return customerDetailsMapper.returnDTO(customerDetailsRepository.findById(cust_id)
                 .orElseThrow(() -> new RuntimeException()));
     }
 
@@ -37,7 +33,7 @@ public class CustomerDetailsService {
         customerDetailsRepository.save(customerDetails);
     }
 
-    public CustomerDetailsDTO updateCustomerDetails(Long id, CustomerDetails customerDetails) {
+    public void updateCustomerDetails(Long id, CustomerDetails customerDetails) {
         CustomerDetails oldCustomerDetails = customerDetailsRepository.findById(id).orElseGet(() -> null);
 
         if (oldCustomerDetails != null) {
@@ -50,9 +46,9 @@ public class CustomerDetailsService {
             oldCustomerDetails.setPay_amount(customerDetails.getPay_amount());
             oldCustomerDetails.setPayment_date(customerDetails.getPayment_date());
             oldCustomerDetails.setTransid(customerDetails.getTransid());
+
+            customerDetailsRepository.save(oldCustomerDetails);
         }
-        customerDetailsRepository.save(oldCustomerDetails);
-        return customerDetailsMapper.returnDto(oldCustomerDetails);
     }
 
     public void deleteCustomerDetails(Long cust_id) {

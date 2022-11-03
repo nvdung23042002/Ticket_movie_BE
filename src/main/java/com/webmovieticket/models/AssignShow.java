@@ -16,29 +16,21 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerBooking {
+public class AssignShow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long show_id;
 
-    private String seat_id;
+    private String morning;
 
-    private String seat_name;
+    private String matney;
 
-    private String changes;
+    private String firstShow;
 
-    private String show_date;
+    private String secondShow;
 
-    private String show_time;
+    private Date addShowDate;
 
-    private Date booking_dt;
-
-    private String convenience;
-
-    private String serviceTax;
-
-    private String concession;
-
-
+    private Date toDate;
 }

@@ -1,9 +1,7 @@
 package com.webmovieticket.controller;
 
 import com.webmovieticket.dto.CustomerBookingDTO;
-import com.webmovieticket.dto.CustomerDetailsDTO;
 import com.webmovieticket.models.CustomerBooking;
-import com.webmovieticket.models.CustomerDetails;
 import com.webmovieticket.service.CustomerBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +13,7 @@ import java.util.List;
 public class CustomerBookingController {
 
     @Autowired
-    CustomerBookingService customerBookingService;
+    private CustomerBookingService customerBookingService;
 
     @GetMapping("customerBooking")
     public List<CustomerBookingDTO> findAll() {

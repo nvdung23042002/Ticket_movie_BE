@@ -2,7 +2,6 @@ package com.webmovieticket.controller;
 
 import com.webmovieticket.dto.CustomerDetailsDTO;
 import com.webmovieticket.models.CustomerDetails;
-import com.webmovieticket.repository.CustomerDetailsRepository;
 import com.webmovieticket.service.CustomerDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/")
 public class CustomerDetailsController {
-
     @Autowired
-    CustomerDetailsService customerDetailsService;
+    private CustomerDetailsService customerDetailsService;
 
     @GetMapping("customerDetail")
     public List<CustomerDetailsDTO> findAll() {
@@ -33,8 +31,8 @@ public class CustomerDetailsController {
     }
 
     @PutMapping("customerDetail/{cust_id}")
-    public CustomerDetailsDTO updateCustomerDetails(@PathVariable Long cust_id, @RequestBody CustomerDetails customerDetails) {
-        return customerDetailsService.updateCustomerDetails(cust_id, customerDetails);
+    public void updateCustomerDetails(@PathVariable Long cust_id, @RequestBody CustomerDetails customerDetails) {
+        customerDetailsService.updateCustomerDetails(cust_id, customerDetails);
 
     }
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerDetailsMapper {
 
-    public CustomerDetailsDTO returnDto(CustomerDetails customerDetails) {
+    public CustomerDetailsDTO returnDTO(CustomerDetails customerDetails) {
         CustomerDetailsDTO result = new CustomerDetailsDTO();
 
         result.setCust_id(customerDetails.getCust_id());

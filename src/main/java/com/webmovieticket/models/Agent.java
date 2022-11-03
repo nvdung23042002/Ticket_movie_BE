@@ -9,36 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerBooking {
+public class Agent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String seat_id;
+    private String username;
 
-    private String seat_name;
+    private String password;
 
-    private String changes;
+    private String email;
 
-    private String show_date;
-
-    private String show_time;
-
-    private Date booking_dt;
-
-    private String convenience;
-
-    private String serviceTax;
-
-    private String concession;
-
+    private String mobile;
 
 }
