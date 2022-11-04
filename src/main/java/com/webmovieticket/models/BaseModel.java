@@ -33,5 +33,5 @@ public class BaseModel {
 
     private Date deletedAt;
 
-    private Boolean isActive;
+    private Boolean isPresent = true;
 }

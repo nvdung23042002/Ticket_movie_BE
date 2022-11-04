@@ -19,5 +19,5 @@ public class BaseDTO {
 
     private Date deletedAt;
 
-    private Boolean isActive;
+    private Boolean isPresent = true;
 }
