@@ -26,6 +26,7 @@ public class MoviesController {
         return moviesService.findById(id);
     }
 
+//    Đưa ra Top Movies có rating cao nhất
     @GetMapping("/toprating")
     public List<MoviesDTO> getMoviesByRating() {
         return moviesService.findByRating();

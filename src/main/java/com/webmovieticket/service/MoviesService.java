@@ -45,7 +45,6 @@ public class MoviesService  {
         return moviesMapper.toDto(moviesRepository.save(movies));
     }
 
-    @Transactional
     public MoviesDTO update(Long id, Movies movies) {
         Movies oldMovies = moviesRepository.findById(id).orElseGet(() -> null);
         if (oldMovies != null) {

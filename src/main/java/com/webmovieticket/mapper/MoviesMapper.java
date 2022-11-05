@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MoviesMapper {
-    @Autowired
-    private MoviesRepository moviesRepository;
-
     public MoviesDTO toDto(Movies movies) {
         MoviesDTO result = new MoviesDTO();
+
         result.setId(movies.getId());
+        result.setCreatedAt(movies.getCreatedAt());
+        result.setDeletedAt(movies.getDeletedAt());
+        result.setIsPresent(movies.getIsPresent());
         result.setName(movies.getName());
         result.setImage(movies.getImage());
         result.setRating(movies.getRating());
@@ -30,6 +31,9 @@ public class MoviesMapper {
     public Movies toEntity(MoviesDTO moviesDTO) {
         Movies result = new Movies();
 
+        result.setCreatedAt(moviesDTO.getCreatedAt());
+        result.setDeletedAt(moviesDTO.getDeletedAt());
+        result.setIsPresent(moviesDTO.getIsPresent());
         result.setName(moviesDTO.getName());
         result.setImage(moviesDTO.getImage());
         result.setRating(moviesDTO.getRating());
@@ -44,6 +48,10 @@ public class MoviesMapper {
     }
 
     public MoviesDTO update(Movies oldMovies, Movies newMovies) {
+
+        oldMovies.setCreatedAt(newMovies.getCreatedAt());
+        oldMovies.setDeletedAt(newMovies.getDeletedAt());
+        oldMovies.setIsPresent(newMovies.getIsPresent());
         oldMovies.setName(newMovies.getName());
         oldMovies.setImage(newMovies.getImage());
         oldMovies.setRating(newMovies.getRating());
