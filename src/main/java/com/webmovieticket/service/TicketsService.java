@@ -76,26 +76,33 @@ public class TicketsService {
 //    Thêm vé cho 1 buổi xem phim.
     @Transactional
     public List<TicketsDTO> insert(String cinemaName, String roomName, String movieName, String showDate, String showTime, String category, Double price) {
-        List<TicketsDTO> ticketsDTOList = new ArrayList<>();
-        for (Seats seats : seatsRepository.findAll()) {
-            Tickets tickets = new Tickets();
-            tickets.setCinemas(cinemasRepository.findByCinemaName(cinemaName));
-            tickets.setCinemaRoom(cinemaRoomRepository.findByRoomName(roomName));
-            tickets.setMovies(moviesRepository.findByName(movieName));
-            tickets.setShowDate(showDate);
-            tickets.setShowTime(showTime);
-            tickets.setCategory(category);
-            tickets.setSeats(seats);
-            tickets.setCategory(category);
-            tickets.setPrice(price);
-
-            ticketsRepository.save(tickets);
-            ticketsDTOList.add(ticketsMapper.toDto(tickets));
+        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaName, roomName, movieName, showDate, showTime);
+        if (oldTicketsDTOList.size() > 0) {
+            return null;
         }
-        return ticketsDTOList;
+        else {
+            List<TicketsDTO> ticketsDTOList = new ArrayList<>();
+            for (Seats seats : seatsRepository.findAll()) {
+                Tickets tickets = new Tickets();
+                tickets.setCinemas(cinemasRepository.findByCinemaName(cinemaName));
+                tickets.setCinemaRoom(cinemaRoomRepository.findByRoomName(roomName));
+                tickets.setMovies(moviesRepository.findByName(movieName));
+                tickets.setShowDate(showDate);
+                tickets.setShowTime(showTime);
+                tickets.setCategory(category);
+                tickets.setSeats(seats);
+                tickets.setCategory(category);
+                tickets.setPrice(price);
+
+                ticketsRepository.save(tickets);
+                ticketsDTOList.add(ticketsMapper.toDto(tickets));
+            }
+            return ticketsDTOList;
+        }
     }
 
 //    Xoá vé phim.
+    @Transactional
     public void delete(String cinemaName, String roomName, String movieName, String showDate, String showTime) {
         List<TicketsDTO> ticketsDTOList = TicketsService.this.getTicket(cinemaName, roomName, movieName, showDate, showTime);
         for (TicketsDTO ticketsDTO : ticketsDTOList) {

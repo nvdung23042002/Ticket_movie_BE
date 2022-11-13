@@ -38,7 +38,13 @@ public class MoviesService  {
 
     @Transactional
     public MoviesDTO insert(Movies movies) {
-        return moviesMapper.toDto(moviesRepository.save(movies));
+        Movies oldMovies = moviesRepository.findByName(movies.getName());
+        if (oldMovies == null) {
+            return moviesMapper.toDto(moviesRepository.save(movies));
+        }
+        else {
+            return null;
+        }
     }
 
     public MoviesDTO update(Long id, Movies movies) {
