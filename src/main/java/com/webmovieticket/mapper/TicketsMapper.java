@@ -2,10 +2,15 @@ package com.webmovieticket.mapper;
 
 import com.webmovieticket.dto.TicketsDTO;
 import com.webmovieticket.models.Tickets;
+import com.webmovieticket.repository.TicketsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TicketsMapper {
+
+    @Autowired
+    private TicketsRepository ticketsRepository;
 
     public TicketsDTO toDto(Tickets tickets) {
         TicketsDTO result = new TicketsDTO();
@@ -14,12 +19,15 @@ public class TicketsMapper {
         result.setCreatedAt(tickets.getCreatedAt());
         result.setDeletedAt(tickets.getDeletedAt());
         result.setIsPresent(tickets.getIsPresent());
-        result.setSeatName(tickets.getSeatName());
+
+        result.setMovieName(tickets.getMovies().getName());
+        result.setCinemaName(tickets.getCinemas().getCinemaName());
+        result.setRoomName(tickets.getCinemaRoom().getRoomName());
+        result.setSeatName(tickets.getSeats().getSeatName());
+
         result.setShowDate(tickets.getShowDate());
         result.setShowTime(tickets.getShowTime());
         result.setCategory(tickets.getCategory());
-        result.setTheaterId(tickets.getTheaterId());
-        result.setLocalId(tickets.getLocalId());
         result.setPrice(tickets.getPrice());
         result.setCustomerId(tickets.getCustomerId());
         result.setPaymentStatus(tickets.getPaymentStatus());
@@ -34,12 +42,10 @@ public class TicketsMapper {
         result.setCreatedAt(ticketsDTO.getCreatedAt());
         result.setDeletedAt(ticketsDTO.getDeletedAt());
         result.setIsPresent(ticketsDTO.getIsPresent());
-        result.setSeatName(ticketsDTO.getSeatName());
+
         result.setShowDate(ticketsDTO.getShowDate());
         result.setShowTime(ticketsDTO.getShowTime());
         result.setCategory(ticketsDTO.getCategory());
-        result.setTheaterId(ticketsDTO.getTheaterId());
-        result.setLocalId(ticketsDTO.getLocalId());
         result.setPrice(ticketsDTO.getPrice());
         result.setCustomerId(ticketsDTO.getCustomerId());
         result.setPaymentStatus(ticketsDTO.getPaymentStatus());
@@ -53,12 +59,15 @@ public class TicketsMapper {
         oldTickets.setCreatedAt(newTickets.getCreatedAt());
         oldTickets.setDeletedAt(newTickets.getDeletedAt());
         oldTickets.setIsPresent(newTickets.getIsPresent());
-        oldTickets.setSeatName(newTickets.getSeatName());
+
+        oldTickets.setMovies(newTickets.getMovies());
+        oldTickets.setCinemas(newTickets.getCinemas());
+        oldTickets.setSeats(newTickets.getSeats());
+        oldTickets.setCinemaRoom(newTickets.getCinemaRoom());
+
         oldTickets.setShowDate(newTickets.getShowDate());
         oldTickets.setShowTime(newTickets.getShowTime());
         oldTickets.setCategory(newTickets.getCategory());
-        oldTickets.setTheaterId(newTickets.getTheaterId());
-        oldTickets.setLocalId(newTickets.getLocalId());
         oldTickets.setPrice(newTickets.getPrice());
         oldTickets.setCustomerId(newTickets.getCustomerId());
         oldTickets.setPaymentStatus(newTickets.getPaymentStatus());

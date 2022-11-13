@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MoviesRepository extends JpaRepository<Movies, Long> {
-    List<Movies> findByName(String name);
+    public Movies findByName(String name);
 
     @Query(value = "SELECT * FROM movies ORDER BY rating DESC LIMIT 5", nativeQuery = true)
     List<Movies> findMoviesByRating();

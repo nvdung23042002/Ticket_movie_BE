@@ -31,10 +31,6 @@ public class MoviesService  {
         return moviesMapper.toDto(moviesRepository.findById(id).orElseThrow(() -> new RuntimeException()));
     }
 
-    public List<MoviesDTO> findByName(String name) {
-        return null;
-    }
-
     public List<MoviesDTO> findByRating() {
         return moviesRepository.findMoviesByRating().stream().map(
                 movies -> moviesMapper.toDto(movies)).collect(Collectors.toList());
