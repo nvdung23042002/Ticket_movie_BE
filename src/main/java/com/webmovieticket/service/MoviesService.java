@@ -31,29 +31,20 @@ public class MoviesService  {
         return moviesMapper.toDto(moviesRepository.findById(id).orElseThrow(() -> new RuntimeException()));
     }
 
-    public List<MoviesDTO> findByRating() {
-        return moviesRepository.findMoviesByRating().stream().map(
+    public List<MoviesDTO> findByRating(int ratingSize) {
+        return moviesRepository.findMoviesByRating(ratingSize).stream().map(
                 movies -> moviesMapper.toDto(movies)).collect(Collectors.toList());
     }
 
     @Transactional
     public MoviesDTO insert(Movies movies) {
-        Movies oldMovies = moviesRepository.findByName(movies.getName());
-        if (oldMovies == null) {
-            return moviesMapper.toDto(moviesRepository.save(movies));
-        }
-        else {
-            return null;
-        }
+        return moviesMapper.toDto(moviesRepository.save(movies));
     }
 
+    @Transactional
     public MoviesDTO update(Long id, Movies movies) {
-        Movies oldMovies = moviesRepository.findById(id).orElseGet(() -> null);
-        if (oldMovies != null) {
-            return moviesMapper.update(oldMovies, movies);
-        } else {
-            return null;
-        }
+        Movies oldMovies = moviesRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        return moviesMapper.toDto(moviesRepository.save(moviesMapper.update(oldMovies, movies)));
     }
 
     @Transactional

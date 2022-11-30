@@ -25,4 +25,9 @@ public class Movies extends BaseModel {
 
     private String lang;
     private String trailerUrl;
+
+    private String category;
+    private String debut;
+    private String language;
+    private String movieDuration;
 }

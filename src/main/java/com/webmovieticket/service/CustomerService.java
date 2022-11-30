@@ -31,11 +31,11 @@ public class CustomerService {
 
     @Transactional
     public CustomerDetailsDTO save(Long id, CustomerDetails customerDetails) {
-        CustomerDetails oldCustomer = customerRepository.findById(id)
-                .orElseGet(() -> null);
+        customerDetails.setId(id);
+        CustomerDetails oldCustomer = customerRepository.findById(id).orElseGet(() -> null);
 
         if (oldCustomer != null) {
-            return customerMapper.update(oldCustomer, customerDetails);
+            return customerMapper.toDto(customerRepository.save(customerMapper.update(oldCustomer, customerDetails)));
         } else {
             return customerMapper.toDto(customerRepository.save(customerDetails));
         }

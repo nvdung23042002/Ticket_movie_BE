@@ -10,14 +10,25 @@ public class CustomerMapper {
     public CustomerDetailsDTO toDto(CustomerDetails customerDetails) {
         CustomerDetailsDTO result = new CustomerDetailsDTO();
 
-        result.setId(customerDetails.getId());
-        result.setCreatedAt(customerDetails.getCreatedAt());
-        result.setDeletedAt(customerDetails.getDeletedAt());
-        result.setIsPresent(customerDetails.getIsPresent());
-        result.setName(customerDetails.getName());
-        result.setEmail(customerDetails.getEmail());
-        result.setAddress(customerDetails.getAddress());
-        result.setMobile(customerDetails.getMobile());
+        if (customerDetails.getId() != null) {
+            result.setId(customerDetails.getId());
+        }
+
+        if (customerDetails.getName() != null) {
+            result.setName(customerDetails.getName());
+        }
+
+        if (customerDetails.getEmail() != null) {
+            result.setEmail(customerDetails.getEmail());
+        }
+
+        if (customerDetails.getAddress() != null) {
+            result.setAddress(customerDetails.getAddress());
+        }
+
+        if (customerDetails.getMobile() != null) {
+            result.setMobile(customerDetails.getMobile());
+        }
 
         return result;
     }
@@ -25,26 +36,43 @@ public class CustomerMapper {
     public CustomerDetails toEntity(CustomerDetailsDTO customerDetailsDTO) {
         CustomerDetails result = new CustomerDetails();
 
-        result.setCreatedAt(customerDetailsDTO.getCreatedAt());
-        result.setDeletedAt(customerDetailsDTO.getDeletedAt());
-        result.setIsPresent(customerDetailsDTO.getIsPresent());
-        result.setName(customerDetailsDTO.getName());
-        result.setEmail(customerDetailsDTO.getEmail());
-        result.setAddress(customerDetailsDTO.getAddress());
-        result.setMobile(customerDetailsDTO.getMobile());
+        if (customerDetailsDTO.getName() != null) {
+            result.setName(customerDetailsDTO.getName());
+        }
+
+        if (customerDetailsDTO.getEmail() != null) {
+            result.setEmail(customerDetailsDTO.getEmail());
+        }
+
+        if (customerDetailsDTO.getAddress() != null) {
+            result.setAddress(customerDetailsDTO.getAddress());
+        }
+
+        if (customerDetailsDTO.getMobile() != null) {
+            result.setMobile(customerDetailsDTO.getMobile());
+        }
 
         return result;
     }
 
-    public CustomerDetailsDTO update(CustomerDetails oldCustomer, CustomerDetails newCustomer) {
-        oldCustomer.setCreatedAt(newCustomer.getCreatedAt());
-        oldCustomer.setDeletedAt(newCustomer.getDeletedAt());
-        oldCustomer.setIsPresent(newCustomer.getIsPresent());
-        oldCustomer.setName(newCustomer.getName());
-        oldCustomer.setEmail(newCustomer.getEmail());
-        oldCustomer.setAddress(newCustomer.getAddress());
-        oldCustomer.setMobile(newCustomer.getMobile());
+    public CustomerDetails update(CustomerDetails oldCustomer, CustomerDetails newCustomer) {
 
-        return CustomerMapper.this.toDto(oldCustomer);
+        if (newCustomer.getName() != null) {
+            oldCustomer.setName(newCustomer.getName());
+        }
+
+        if (newCustomer.getEmail() != null) {
+            oldCustomer.setEmail(newCustomer.getEmail());
+        }
+
+        if (newCustomer.getAddress() != null) {
+            oldCustomer.setAddress(newCustomer.getAddress());
+        }
+
+        if (newCustomer.getMobile() != null) {
+            oldCustomer.setMobile(newCustomer.getMobile());
+        }
+
+        return oldCustomer;
     }
 }

@@ -8,10 +8,12 @@ import com.webmovieticket.payload.request.LoginRequest;
 import com.webmovieticket.payload.request.SignupRequest;
 import com.webmovieticket.payload.response.JwtResponse;
 import com.webmovieticket.payload.response.MessageResponse;
+import com.webmovieticket.repository.CustomerRepository;
 import com.webmovieticket.repository.RoleRepository;
 import com.webmovieticket.repository.UserRepository;
 import com.webmovieticket.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +40,9 @@ public class AuthController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -109,13 +114,29 @@ public class AuthController {
                 }
             });
         }
-
-
         user.setRoles(roles);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    //TODO : Sign Out
+    @GetMapping("")
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<?> delete(@RequestBody Long[] ids) {
+        try {
+            for (Long id : ids) {
+                userRepository.deleteById(id);
+                if (customerRepository.findById(id).isPresent()) {
+                    customerRepository.deleteById(id);
+                }
+            }
+            return ResponseEntity.status(HttpStatus.OK).body("Delete success!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("id user is not exist!");
+        }
+    }
 }

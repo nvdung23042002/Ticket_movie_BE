@@ -19,4 +19,9 @@ public class MoviesDTO extends BaseDTO {
     private String description;
     private String trailerUrl;
     private String lang;
+
+    private String category;
+    private String debut;
+    private String language;
+    private String movieDuration;
 }
