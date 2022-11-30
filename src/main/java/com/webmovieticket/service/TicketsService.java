@@ -33,9 +33,9 @@ public class TicketsService {
     private TicketsMapper ticketsMapper;
 
 //    Danh sách các vé trong 1 buổi chiếu phim.
-    public List<TicketsDTO> getTicket(String cinemaName, String roomName, String movieName, String showDate, String showTime) {
+    public List<TicketsDTO> getTicket(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime) {
 
-        List<Object[]> ticketList = ticketsRepository.getTickets(cinemaName, roomName, movieName, showDate, showTime);
+        List<Object[]> ticketList = ticketsRepository.getTickets(cinemaId, roomId, movieId, showDate, showTime);
         List<TicketsDTO> ticketsDTOList = new ArrayList<>();
 
         for(Object[] obj : ticketList) {
@@ -75,8 +75,8 @@ public class TicketsService {
 
 //    Thêm vé cho 1 buổi xem phim.
     @Transactional
-    public List<TicketsDTO> insert(String cinemaName, String roomName, String movieName, String showDate, String showTime, String category, Double price) {
-        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaName, roomName, movieName, showDate, showTime);
+    public List<TicketsDTO> insert(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime, String category, Double price) {
+        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showTime);
         if (oldTicketsDTOList.size() > 0) {
             return null;
         }
@@ -84,9 +84,9 @@ public class TicketsService {
             List<TicketsDTO> ticketsDTOList = new ArrayList<>();
             for (Seats seats : seatsRepository.findAll()) {
                 Tickets tickets = new Tickets();
-                tickets.setCinemas(cinemasRepository.findByCinemaName(cinemaName));
-                tickets.setCinemaRoom(cinemaRoomRepository.findByRoomName(roomName));
-                tickets.setMovies(moviesRepository.findByName(movieName));
+                tickets.setCinemas(cinemasRepository.findById(cinemaId).orElseThrow(() -> new RuntimeException()));
+                tickets.setCinemaRoom(cinemaRoomRepository.findById(roomId).orElseThrow(() -> new RuntimeException()));
+                tickets.setMovies(moviesRepository.findById(movieId).orElseThrow(() -> new RuntimeException()));
                 tickets.setShowDate(showDate);
                 tickets.setShowTime(showTime);
                 tickets.setCategory(category);
@@ -103,8 +103,8 @@ public class TicketsService {
 
 //    Xoá vé phim.
     @Transactional
-    public void delete(String cinemaName, String roomName, String movieName, String showDate, String showTime) {
-        List<TicketsDTO> ticketsDTOList = TicketsService.this.getTicket(cinemaName, roomName, movieName, showDate, showTime);
+    public void delete(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime) {
+        List<TicketsDTO> ticketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showTime);
         for (TicketsDTO ticketsDTO : ticketsDTOList) {
             ticketsRepository.deleteById(ticketsDTO.getId());
         }
