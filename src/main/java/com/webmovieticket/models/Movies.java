@@ -30,4 +30,5 @@ public class Movies extends BaseModel {
     private String debut;
     private String language;
     private String movieDuration;
+    private String rated;
 }

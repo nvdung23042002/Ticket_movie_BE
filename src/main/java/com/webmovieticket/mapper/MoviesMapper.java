@@ -78,6 +78,9 @@ public class MoviesMapper {
             result.setMovieDuration(movies.getMovieDuration());
         }
 
+        if (movies.getRated() != null) {
+            result.setRated(movies.getRated());
+        }
         return result;
     }
 
@@ -148,6 +151,10 @@ public class MoviesMapper {
             result.setMovieDuration(moviesDTO.getMovieDuration());
         }
 
+        if (moviesDTO.getRated() != null) {
+            result.setRated(moviesDTO.getRated());
+        }
+
         return result;
     }
 
@@ -215,6 +222,10 @@ public class MoviesMapper {
 
         if (newMovies.getMovieDuration() != null) {
             oldMovies.setMovieDuration(newMovies.getMovieDuration());
+        }
+
+        if (newMovies.getRated() != null) {
+            oldMovies.setRated(newMovies.getRated());
         }
 
         return oldMovies;
