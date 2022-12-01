@@ -139,4 +139,17 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("id user is not exist!");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
+        try {
+            userRepository.deleteById(id);
+            if (customerRepository.findById(id).isPresent()) {
+                customerRepository.deleteById(id);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body("Delete success!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("id user is not exist!");
+        }
+    }
 }

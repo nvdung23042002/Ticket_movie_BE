@@ -53,4 +53,9 @@ public class MoviesService  {
             moviesRepository.deleteById(id);
         }
     }
+
+    @Transactional
+    public void deleteById(Long id) {
+        moviesRepository.deleteById(id);
+    }
 }
