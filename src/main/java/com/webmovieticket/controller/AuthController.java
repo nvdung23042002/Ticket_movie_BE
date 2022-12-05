@@ -8,7 +8,6 @@ import com.webmovieticket.payload.request.LoginRequest;
 import com.webmovieticket.payload.request.SignupRequest;
 import com.webmovieticket.payload.response.JwtResponse;
 import com.webmovieticket.payload.response.MessageResponse;
-import com.webmovieticket.repository.CustomerRepository;
 import com.webmovieticket.repository.RoleRepository;
 import com.webmovieticket.repository.UserRepository;
 import com.webmovieticket.service.UserDetailsImpl;
@@ -40,9 +39,6 @@ public class AuthController {
 
     @Autowired
     RoleRepository roleRepository;
-
-    @Autowired
-    CustomerRepository customerRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -89,7 +85,11 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getFullName(),
+                signUpRequest.getPhoneNumber(),
+                signUpRequest.getBirthDay(),
+                signUpRequest.getAddress());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -130,9 +130,6 @@ public class AuthController {
         try {
             for (Long id : ids) {
                 userRepository.deleteById(id);
-                if (customerRepository.findById(id).isPresent()) {
-                    customerRepository.deleteById(id);
-                }
             }
             return ResponseEntity.status(HttpStatus.OK).body("Delete success!");
         } catch (RuntimeException e) {
@@ -144,9 +141,6 @@ public class AuthController {
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         try {
             userRepository.deleteById(id);
-            if (customerRepository.findById(id).isPresent()) {
-                customerRepository.deleteById(id);
-            }
             return ResponseEntity.status(HttpStatus.OK).body("Delete success!");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("id user is not exist!");
