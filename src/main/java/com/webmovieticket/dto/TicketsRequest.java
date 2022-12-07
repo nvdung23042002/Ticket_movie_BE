@@ -15,5 +15,5 @@ public class TicketsRequest {
     private String showDate;
     private String showTime;
     private String category;
-    private Double price;
+    private Integer price;
 }

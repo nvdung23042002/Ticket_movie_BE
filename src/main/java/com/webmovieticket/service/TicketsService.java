@@ -45,7 +45,7 @@ public class TicketsService {
                 ticketsDTO.setId(Long.parseLong(obj[0].toString()));
             }
             if (obj[1] != null) {
-                ticketsDTO.setPrice(Double.parseDouble(obj[1].toString()));
+                ticketsDTO.setPrice(Integer.parseInt(obj[1].toString()));
             }
             if (obj[2] != null) {
                 ticketsDTO.setShowDate(obj[2].toString());
@@ -75,7 +75,7 @@ public class TicketsService {
 
 //    Thêm vé cho 1 buổi xem phim.
     @Transactional
-    public List<TicketsDTO> insert(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime, String category, Double price) {
+    public List<TicketsDTO> insert(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime, String category, Integer price) {
         List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showTime);
         if (oldTicketsDTOList.size() > 0) {
             return null;
@@ -108,5 +108,14 @@ public class TicketsService {
         for (TicketsDTO ticketsDTO : ticketsDTOList) {
             ticketsRepository.deleteById(ticketsDTO.getId());
         }
+    }
+
+    @Transactional
+    public List<TicketsDTO> getTicketsByUserId(Long userId) {
+        List<TicketsDTO> results = new ArrayList<>();
+        for (Tickets tickets : ticketsRepository.getTicketsByUserId(userId)) {
+            results.add(ticketsMapper.toDto(tickets));
+        }
+        return results;
     }
 }

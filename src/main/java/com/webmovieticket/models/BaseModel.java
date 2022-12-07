@@ -25,13 +25,5 @@ public class BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
-    private Date createdAt;
-
-    @LastModifiedDate
-    private Date updatedAt;
-
-    private Date deletedAt;
-
     private Boolean isPresent = true;
 }

@@ -14,14 +14,6 @@ public class MoviesMapper {
             result.setId(movies.getId());
         }
 
-        if (movies.getCreatedAt() != null) {
-            result.setCreatedAt(movies.getCreatedAt());
-        }
-
-        if (movies.getDeletedAt() != null) {
-            result.setDeletedAt(movies.getDeletedAt());
-        }
-
         if (movies.getIsPresent() != null) {
             result.setIsPresent(movies.getIsPresent());
         }
@@ -87,14 +79,6 @@ public class MoviesMapper {
     public Movies toEntity(MoviesDTO moviesDTO) {
         Movies result = new Movies();
 
-        if (moviesDTO.getCreatedAt() != null) {
-            result.setCreatedAt(moviesDTO.getCreatedAt());
-        }
-
-        if (moviesDTO.getDeletedAt() != null) {
-            result.setDeletedAt(moviesDTO.getDeletedAt());
-        }
-
         if (moviesDTO.getIsPresent() != null) {
             result.setIsPresent(moviesDTO.getIsPresent());
         }
@@ -159,14 +143,6 @@ public class MoviesMapper {
     }
 
     public Movies update(Movies oldMovies, Movies newMovies) {
-
-        if (newMovies.getCreatedAt() != null) {
-            oldMovies.setCreatedAt(newMovies.getCreatedAt());
-        }
-
-        if (newMovies.getDeletedAt() != null) {
-            oldMovies.setDeletedAt(newMovies.getDeletedAt());
-        }
 
         if (newMovies.getIsPresent() != null) {
             oldMovies.setIsPresent(newMovies.getIsPresent());
