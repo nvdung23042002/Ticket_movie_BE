@@ -1,5 +1,6 @@
 package com.webmovieticket.service;
 
+import com.webmovieticket.dto.AuditDTO;
 import com.webmovieticket.dto.TicketsDTO;
 import com.webmovieticket.mapper.TicketsMapper;
 import com.webmovieticket.models.*;
@@ -117,5 +118,20 @@ public class TicketsService {
             results.add(ticketsMapper.toDto(tickets));
         }
         return results;
+    }
+
+    public AuditDTO getAudit(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime) {
+        AuditDTO auditDTO = new AuditDTO();
+        Integer sumAmount = 0;
+        Integer sumNumberSeat = 0;
+        for (TicketsDTO ticketsDTO : this.getTicket(cinemaId, roomId, movieId, showDate, showTime)) {
+            if (ticketsDTO.getPaymentStatus()) {
+                sumAmount += ticketsDTO.getPrice();
+                sumNumberSeat += 1;
+            }
+        }
+        auditDTO.setSumAmount(sumAmount);
+        auditDTO.setSumNumberSeat(sumNumberSeat);
+        return auditDTO;
     }
 }

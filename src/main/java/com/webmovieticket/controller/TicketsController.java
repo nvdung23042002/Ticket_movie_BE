@@ -47,4 +47,9 @@ public class TicketsController {
     public ResponseEntity<?> getTicketsByUserId(@PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getTicketsByUserId(userId));
     }
+
+    @GetMapping("/audit")
+    public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime()));
+    }
 }
