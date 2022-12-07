@@ -24,11 +24,12 @@ public class TicketsDTO extends BaseDTO {
     private Boolean paymentStatus = false;
     private Date paymentDate;
 
-    private Double price;
+    private Integer price;
     private String showDate;
     private String showTime;
     private String movieName;
     private String cinemaName;
     private String roomName;
     private String seatName;
+    private Long userId;
 }

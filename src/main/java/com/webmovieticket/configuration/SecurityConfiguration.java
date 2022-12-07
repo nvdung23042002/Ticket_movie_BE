@@ -64,7 +64,6 @@ public class SecurityConfiguration {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/v*/auth/**").permitAll()
-                .antMatchers("/api/v*/movies/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .anyRequest()
                 .authenticated();

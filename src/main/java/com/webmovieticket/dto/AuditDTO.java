@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDetailsDTO extends BaseDTO {
-    private String name;
-    private String email;
-    private String mobile;
-    private String address;
+public class AuditDTO {
+    private Integer sumAmount;
+    private Integer sumNumberSeat;
 }

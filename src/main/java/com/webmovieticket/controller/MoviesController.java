@@ -70,4 +70,14 @@ public class MoviesController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("id film is not exist!");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
+        try {
+            moviesService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Delete success!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("id film is not exist!");
+        }
+    }
 }

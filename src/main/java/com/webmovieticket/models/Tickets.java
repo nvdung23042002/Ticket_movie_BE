@@ -37,10 +37,14 @@ public class Tickets extends BaseModel {
 
     private String showDate;
     private String showTime;
-    private Double price;
+    private Integer price;
     private String category;
 
-    private Long customerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    @JsonIgnore
+    private User user;
+
     private Boolean paymentStatus = false;
     private Date paymentDate;
 }

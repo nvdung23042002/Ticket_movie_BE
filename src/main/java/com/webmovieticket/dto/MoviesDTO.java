@@ -24,4 +24,5 @@ public class MoviesDTO extends BaseDTO {
     private String debut;
     private String language;
     private String movieDuration;
+    private String rated;
 }

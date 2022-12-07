@@ -42,4 +42,14 @@ public class TicketsController {
     public void delete(@RequestBody TicketsRequest ticketsRequest) {
         ticketsService.delete(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime());
     }
+
+    @GetMapping("/userid/{userId}")
+    public ResponseEntity<?> getTicketsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getTicketsByUserId(userId));
+    }
+
+    @GetMapping("/audit")
+    public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime()));
+    }
 }
