@@ -25,13 +25,13 @@ public class TicketsController {
 
     @GetMapping("")
     public List<TicketsDTO> getTickets(@RequestBody TicketsRequest ticketsRequest) {
-        return ticketsService.getTicket(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime());
+        return ticketsService.getTicket(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime());
     }
 
     @PostMapping("")
     public ResponseEntity<?> insert(@RequestBody TicketsRequest ticketsRequest) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(ticketsService.insert(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime(), ticketsRequest.getCategory(), ticketsRequest.getPrice()));
+            return ResponseEntity.status(HttpStatus.OK).body(ticketsService.insert(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime(), ticketsRequest.getCategory(), ticketsRequest.getPrice()));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("can not found cinemaId or roomId or movieId");
         }
@@ -40,7 +40,7 @@ public class TicketsController {
 
     @DeleteMapping("")
     public void delete(@RequestBody TicketsRequest ticketsRequest) {
-        ticketsService.delete(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime());
+        ticketsService.delete(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime());
     }
 
     @GetMapping("/userid/{userId}")
@@ -50,6 +50,6 @@ public class TicketsController {
 
     @GetMapping("/audit")
     public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime()));
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime()));
     }
 }

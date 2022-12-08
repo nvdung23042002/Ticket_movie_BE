@@ -13,6 +13,7 @@ public class TicketsRequest {
     private Long roomId;
     private Long movieId;
     private String showDate;
+    private String showMonth;
     private String showTime;
     private String category;
     private Integer price;

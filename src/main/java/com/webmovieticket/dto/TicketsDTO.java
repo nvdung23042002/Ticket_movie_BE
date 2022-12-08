@@ -26,6 +26,7 @@ public class TicketsDTO extends BaseDTO {
 
     private Integer price;
     private String showDate;
+    private String showMonth;
     private String showTime;
     private String movieName;
     private String cinemaName;

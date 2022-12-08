@@ -34,9 +34,9 @@ public class TicketsService {
     private TicketsMapper ticketsMapper;
 
 //    Danh sách các vé trong 1 buổi chiếu phim.
-    public List<TicketsDTO> getTicket(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime) {
+    public List<TicketsDTO> getTicket(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime) {
 
-        List<Object[]> ticketList = ticketsRepository.getTickets(cinemaId, roomId, movieId, showDate, showTime);
+        List<Object[]> ticketList = ticketsRepository.getTickets(cinemaId, roomId, movieId, showDate, showMonth, showTime);
         List<TicketsDTO> ticketsDTOList = new ArrayList<>();
 
         for(Object[] obj : ticketList) {
@@ -51,23 +51,28 @@ public class TicketsService {
             if (obj[2] != null) {
                 ticketsDTO.setShowDate(obj[2].toString());
             }
+
             if (obj[3] != null) {
-                ticketsDTO.setShowTime(obj[3].toString());
+                ticketsDTO.setShowMonth(obj[3].toString());
             }
+
             if (obj[4] != null) {
-                ticketsDTO.setPaymentStatus(Boolean.parseBoolean(obj[4].toString()));
+                ticketsDTO.setShowTime(obj[4].toString());
             }
             if (obj[5] != null) {
-                ticketsDTO.setMovieName(obj[5].toString());
+                ticketsDTO.setPaymentStatus(Boolean.parseBoolean(obj[5].toString()));
             }
             if (obj[6] != null) {
-                ticketsDTO.setCinemaName(obj[6].toString());
+                ticketsDTO.setMovieName(obj[6].toString());
             }
             if (obj[7] != null) {
-                ticketsDTO.setRoomName(obj[7].toString());
+                ticketsDTO.setCinemaName(obj[7].toString());
             }
             if (obj[8] != null) {
-                ticketsDTO.setSeatName(obj[8].toString());
+                ticketsDTO.setRoomName(obj[8].toString());
+            }
+            if (obj[9] != null) {
+                ticketsDTO.setSeatName(obj[9].toString());
             }
             ticketsDTOList.add(ticketsDTO);
         }
@@ -76,8 +81,8 @@ public class TicketsService {
 
 //    Thêm vé cho 1 buổi xem phim.
     @Transactional
-    public List<TicketsDTO> insert(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime, String category, Integer price) {
-        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showTime);
+    public List<TicketsDTO> insert(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime, String category, Integer price) {
+        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime);
         if (oldTicketsDTOList.size() > 0) {
             return null;
         }
@@ -89,6 +94,7 @@ public class TicketsService {
                 tickets.setCinemaRoom(cinemaRoomRepository.findById(roomId).orElseThrow(() -> new RuntimeException()));
                 tickets.setMovies(moviesRepository.findById(movieId).orElseThrow(() -> new RuntimeException()));
                 tickets.setShowDate(showDate);
+                tickets.setShowMonth(showMonth);
                 tickets.setShowTime(showTime);
                 tickets.setCategory(category);
                 tickets.setSeats(seats);
@@ -104,8 +110,8 @@ public class TicketsService {
 
 //    Xoá vé phim.
     @Transactional
-    public void delete(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime) {
-        List<TicketsDTO> ticketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showTime);
+    public void delete(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime) {
+        List<TicketsDTO> ticketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime);
         for (TicketsDTO ticketsDTO : ticketsDTOList) {
             ticketsRepository.deleteById(ticketsDTO.getId());
         }
@@ -120,11 +126,11 @@ public class TicketsService {
         return results;
     }
 
-    public AuditDTO getAudit(Long cinemaId, Long roomId, Long movieId, String showDate, String showTime) {
+    public AuditDTO getAudit(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime) {
         AuditDTO auditDTO = new AuditDTO();
         Integer sumAmount = 0;
         Integer sumNumberSeat = 0;
-        for (TicketsDTO ticketsDTO : this.getTicket(cinemaId, roomId, movieId, showDate, showTime)) {
+        for (TicketsDTO ticketsDTO : this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime)) {
             if (ticketsDTO.getPaymentStatus()) {
                 sumAmount += ticketsDTO.getPrice();
                 sumNumberSeat += 1;

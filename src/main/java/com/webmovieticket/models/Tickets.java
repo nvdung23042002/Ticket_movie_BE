@@ -36,6 +36,7 @@ public class Tickets extends BaseModel {
     private Seats seats;
 
     private String showDate;
+    private String showMonth;
     private String showTime;
     private Integer price;
     private String category;
