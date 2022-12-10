@@ -141,9 +141,9 @@ public class TicketsService {
         return auditDTO;
     }
 
-    public List<TicketsDTO> getAll() {
+    public List<TicketsDTO> getAll(Long movieId) {
 
-        List<Object[]> ticketList = ticketsRepository.getAll();
+        List<Object[]> ticketList = ticketsRepository.getAll(movieId);
         List<TicketsDTO> ticketsDTOList = new ArrayList<>();
 
         for(Object[] obj : ticketList) {

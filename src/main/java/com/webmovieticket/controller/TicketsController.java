@@ -50,8 +50,8 @@ public class TicketsController {
         return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime()));
     }
 
-    @GetMapping("/all")
-    public List<TicketsDTO> getAll() {
-        return ticketsService.getAll();
+    @GetMapping("/movieId/{movieId}")
+    public List<TicketsDTO> getAll(@PathVariable Long movieId) {
+        return ticketsService.getAll(movieId);
     }
 }
