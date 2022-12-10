@@ -15,4 +15,7 @@ public interface TicketsRepository extends JpaRepository<Tickets, Long> {
 
     @Query(value = "SELECT * FROM tickets where user_id = :userid", nativeQuery = true)
     public List<Tickets> getTicketsByUserId(@Param("userid") Long userid);
+
+    @Query(value = "select tickets.id, tickets.price, tickets.show_date, tickets.show_month, tickets.show_time, tickets.payment_status, movies.name, cinemas.cinema_name, cinema_rooms.room_name ,seats.seat_name, tickets.category from tickets inner join movies on tickets.movie_id = movies.id inner join cinemas on cinemas.id = tickets.cinema_id inner join cinema_rooms on cinema_rooms.id = tickets.room_id inner join seats on seats.id = tickets.seat_id", nativeQuery = true)
+    public List<Object[]> getAll();
 }

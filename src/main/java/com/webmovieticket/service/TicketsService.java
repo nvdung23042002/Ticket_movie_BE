@@ -140,4 +140,49 @@ public class TicketsService {
         auditDTO.setSumNumberSeat(sumNumberSeat);
         return auditDTO;
     }
+
+    public List<TicketsDTO> getAll() {
+
+        List<Object[]> ticketList = ticketsRepository.getAll();
+        List<TicketsDTO> ticketsDTOList = new ArrayList<>();
+
+        for(Object[] obj : ticketList) {
+            TicketsDTO ticketsDTO = new TicketsDTO();
+
+            if (obj[0] != null) {
+                ticketsDTO.setId(Long.parseLong(obj[0].toString()));
+            }
+            if (obj[1] != null) {
+                ticketsDTO.setPrice(Integer.parseInt(obj[1].toString()));
+            }
+            if (obj[2] != null) {
+                ticketsDTO.setShowDate(obj[2].toString());
+            }
+
+            if (obj[3] != null) {
+                ticketsDTO.setShowMonth(obj[3].toString());
+            }
+
+            if (obj[4] != null) {
+                ticketsDTO.setShowTime(obj[4].toString());
+            }
+            if (obj[5] != null) {
+                ticketsDTO.setPaymentStatus(Boolean.parseBoolean(obj[5].toString()));
+            }
+            if (obj[6] != null) {
+                ticketsDTO.setMovieName(obj[6].toString());
+            }
+            if (obj[7] != null) {
+                ticketsDTO.setCinemaName(obj[7].toString());
+            }
+            if (obj[8] != null) {
+                ticketsDTO.setRoomName(obj[8].toString());
+            }
+            if (obj[9] != null) {
+                ticketsDTO.setSeatName(obj[9].toString());
+            }
+            ticketsDTOList.add(ticketsDTO);
+        }
+        return ticketsDTOList;
+    }
 }

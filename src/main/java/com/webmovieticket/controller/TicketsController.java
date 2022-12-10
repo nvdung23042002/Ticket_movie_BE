@@ -20,9 +20,6 @@ public class TicketsController {
     @Autowired
     private TicketsService ticketsService;
 
-    @Autowired
-    private TicketsRepository ticketsRepository;
-
     @GetMapping("")
     public List<TicketsDTO> getTickets(@RequestBody TicketsRequest ticketsRequest) {
         return ticketsService.getTicket(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime());
@@ -51,5 +48,10 @@ public class TicketsController {
     @GetMapping("/audit")
     public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime()));
+    }
+
+    @GetMapping("/all")
+    public List<TicketsDTO> getAll() {
+        return ticketsService.getAll();
     }
 }
