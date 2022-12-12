@@ -20,36 +20,59 @@ public class TicketsController {
     @Autowired
     private TicketsService ticketsService;
 
-    @Autowired
-    private TicketsRepository ticketsRepository;
-
-    @GetMapping("")
+    @PutMapping("")
     public List<TicketsDTO> getTickets(@RequestBody TicketsRequest ticketsRequest) {
-        return ticketsService.getTicket(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime());
+        return ticketsService.getTicket(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime());
     }
+
+//    @GetMapping("")
+//    public List<TicketsDTO> getTickets(
+//            @RequestParam(value = "cinemaId", required = false) Long cinemaId,
+//            @RequestParam(value = "roomId", required = false) Long roomId,
+//            @RequestParam(value = "movieId", required = false) Long movieId,
+//            @RequestParam(value = "showDate", required = false) String showDate,
+//            @RequestParam(value = "showMonth", required = false) String showMonth,
+//            @RequestParam(value = "showTime", required = false) String showTime
+//    ) {
+//        return ticketsService.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime);
+//    }
 
     @PostMapping("")
     public ResponseEntity<?> insert(@RequestBody TicketsRequest ticketsRequest) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(ticketsService.insert(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime(), ticketsRequest.getCategory(), ticketsRequest.getPrice()));
+            return ResponseEntity.status(HttpStatus.OK).body(ticketsService.insert(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime(), ticketsRequest.getCategory(), ticketsRequest.getPrice()));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("can not found cinemaId or roomId or movieId");
         }
 
     }
 
+//    Xoá vé
     @DeleteMapping("")
     public void delete(@RequestBody TicketsRequest ticketsRequest) {
-        ticketsService.delete(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime());
+        ticketsService.delete(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime());
     }
 
+//    Lấy ra các vé User đã mua
     @GetMapping("/userid/{userId}")
     public ResponseEntity<?> getTicketsByUserId(@PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getTicketsByUserId(userId));
     }
 
+    //    Doanh thu và số vé bán được trong 1 buổi chiếu phim.
     @GetMapping("/audit")
     public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowTime()));
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime()));
+    }
+
+    @GetMapping("/movieId/{movieId}")
+    public List<TicketsDTO> getAll(@PathVariable Long movieId) {
+        return ticketsService.getAll(movieId);
+    }
+
+    //    Doanh thu và số vé bán được của 1 phim
+    @GetMapping("/auditByid/{movieId}")
+    public ResponseEntity<?> getAuditById(@PathVariable Long movieId) {
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAuditByMovie(movieId));
     }
 }

@@ -43,6 +43,10 @@ public class TicketsMapper {
             result.setShowDate(tickets.getShowDate());
         }
 
+        if (tickets.getShowMonth() != null) {
+            result.setShowMonth(tickets.getShowMonth());
+        }
+
         if (tickets.getShowTime() != null) {
             result.setShowTime(tickets.getShowTime());
         }
