@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,5 +14,4 @@ import java.util.List;
 @Table(name = "cinemas")
 public class Cinemas extends BaseModel {
     private String cinemaName;
-
 }
