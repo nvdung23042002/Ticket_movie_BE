@@ -56,7 +56,12 @@ public class TicketsController {
 //    Lấy ra các vé User đã mua
     @GetMapping("/userid/{userId}")
     public ResponseEntity<?> getTicketsByUserId(@PathVariable Long userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getTicketsByUserId(userId));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getTicketsByUserId(userId));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.OK).body("cannot user By id");
+        }
+
     }
 
     //    Doanh thu và số vé bán được trong 1 buổi chiếu phim.
@@ -73,6 +78,10 @@ public class TicketsController {
     //    Doanh thu và số vé bán được của 1 phim
     @GetMapping("/auditByid/{movieId}")
     public ResponseEntity<?> getAuditById(@PathVariable Long movieId) {
-        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAuditByMovie(movieId));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAuditByMovie(movieId));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.OK).body("cannot movie By id");
+        }
     }
 }
