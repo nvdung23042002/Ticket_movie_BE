@@ -83,25 +83,24 @@ public class TicketsService {
     }
 
 //    Doanh thu và số vé bán được trong 1 buổi chiếu phim.
-    public AuditDTO getAudit(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime) {
-        AuditDTO auditDTO = new AuditDTO();
-        Integer sumAmount = 0;
-        Integer sumNumberSeat = 0;
-        for (TicketsDTO ticketsDTO : this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime)) {
-            if (ticketsDTO.getPaymentStatus()) {
-                sumAmount += ticketsDTO.getPrice();
-                sumNumberSeat += 1;
-            }
-        }
-        auditDTO.setSumAmount(sumAmount);
-        auditDTO.setSumNumberSeat(sumNumberSeat);
-        return auditDTO;
-    }
+//    public AuditDTO getAudit(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime) {
+//        AuditDTO auditDTO = new AuditDTO();
+//        Integer sumAmount = 0;
+//        Integer sumNumberSeat = 0;
+//        for (TicketsDTO ticketsDTO : this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime)) {
+//            if (ticketsDTO.getPaymentStatus()) {
+//                sumAmount += ticketsDTO.getPrice();
+//                sumNumberSeat += 1;
+//            }
+//        }
+//        auditDTO.setSumAmount(sumAmount);
+//        auditDTO.setSumNumberSeat(sumNumberSeat);
+//        return auditDTO;
+//    }
 
     //    Doanh thu và số vé bán được của 1 phim
     public AuditDTO getAuditByMovie(Long movieId) {
         List<Object[]> objects = ticketsRepository.getAuditByMovie(movieId);
-        System.out.println(objects.get(0)[0].toString());
         return new AuditDTO(Integer.parseInt(objects.get(0)[0].toString()), Integer.parseInt(objects.get(0)[1].toString()));
     }
 

@@ -60,10 +60,10 @@ public class TicketsController {
     }
 
     //    Doanh thu và số vé bán được trong 1 buổi chiếu phim.
-    @GetMapping("/audit")
-    public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime()));
-    }
+//    @GetMapping("/audit")
+//    public ResponseEntity<?> getAudit(@RequestBody TicketsRequest ticketsRequest) {
+//        return ResponseEntity.status(HttpStatus.OK).body(ticketsService.getAudit(ticketsRequest.getCinemasId(), ticketsRequest.getRoomId(), ticketsRequest.getMovieId(), ticketsRequest.getShowDate(), ticketsRequest.getShowMonth(), ticketsRequest.getShowTime()));
+//    }
 
     @GetMapping("/movieId/{movieId}")
     public List<TicketsDTO> getAll(@PathVariable Long movieId) {
