@@ -4,14 +4,17 @@ import com.webmovieticket.configuration.vnpay.Config;
 import com.webmovieticket.configuration.vnpay.PaymentConfig;
 import com.webmovieticket.dto.payment.PaymentDTO;
 import com.webmovieticket.dto.payment.PaymentResDTO;
+import com.webmovieticket.models.Movies;
 import com.webmovieticket.models.Tickets;
 import com.webmovieticket.models.TransactionHis;
+import com.webmovieticket.repository.MoviesRepository;
 import com.webmovieticket.repository.TicketsRepository;
 import com.webmovieticket.repository.TransactionHisRepository;
 import com.webmovieticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -33,6 +36,9 @@ public class PaymentController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MoviesRepository moviesRepository;
 
     @PostMapping("/create-payment/{userId}")
     public ResponseEntity<?> createPayment(@PathVariable Long userId, @RequestBody PaymentDTO requestParams) throws IOException {
@@ -111,6 +117,7 @@ public class PaymentController {
         }
     }
 
+    @Transactional
     @GetMapping("/thong-tin-thanh-toan/{userId}")
     public ResponseEntity<?> transactionHandle(
             @PathVariable Long userId,
@@ -141,12 +148,19 @@ public class PaymentController {
                 }
             }
 
+            Integer price = 0;
+            Integer ticket = 0;
+
             for (Long ticketId : listTicketId) {
                 Tickets tickets = ticketsRepository.findById(ticketId).orElseThrow(() -> new RuntimeException());
                 tickets.setPaymentStatus(true);
                 tickets.setUser(userRepository.findById(userId).orElseThrow(() -> new RuntimeException()));
-
                 ticketsRepository.save(tickets);
+
+                Movies movies = moviesRepository.findById(tickets.getMovies().getId()).orElseThrow(() -> new RuntimeException());
+                movies.setSumPriceAudit(movies.getSumPriceAudit() + tickets.getPrice());
+                movies.setSumTicketAudit(movies.getSumTicketAudit() + 1);
+                moviesRepository.save(movies);
             }
 
             TransactionHis transactionHis = new TransactionHis();

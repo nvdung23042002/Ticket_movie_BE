@@ -73,6 +73,15 @@ public class MoviesMapper {
         if (movies.getRated() != null) {
             result.setRated(movies.getRated());
         }
+
+        if (movies.getSumPriceAudit() != null) {
+            result.setSumPriceAudit(movies.getSumPriceAudit());
+        }
+
+        if (movies.getSumTicketAudit() != null) {
+            result.setSumTicketAudit(movies.getSumTicketAudit());
+        }
+
         return result;
     }
 
@@ -139,6 +148,14 @@ public class MoviesMapper {
             result.setRated(moviesDTO.getRated());
         }
 
+        if (moviesDTO.getSumPriceAudit() != null) {
+            result.setSumPriceAudit(moviesDTO.getSumPriceAudit());
+        }
+
+        if (moviesDTO.getSumTicketAudit() != null) {
+            result.setSumTicketAudit(moviesDTO.getSumTicketAudit());
+        }
+
         return result;
     }
 
@@ -202,6 +219,14 @@ public class MoviesMapper {
 
         if (newMovies.getRated() != null) {
             oldMovies.setRated(newMovies.getRated());
+        }
+
+        if (newMovies.getSumPriceAudit() != null) {
+            oldMovies.setSumPriceAudit(newMovies.getSumPriceAudit());
+        }
+
+        if (newMovies.getSumTicketAudit() != null) {
+            oldMovies.setSumTicketAudit(newMovies.getSumTicketAudit());
         }
 
         return oldMovies;
