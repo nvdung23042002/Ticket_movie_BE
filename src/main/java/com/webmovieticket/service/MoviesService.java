@@ -3,7 +3,9 @@ package com.webmovieticket.service;
 import com.webmovieticket.dto.MoviesDTO;
 import com.webmovieticket.mapper.MoviesMapper;
 import com.webmovieticket.models.Movies;
+import com.webmovieticket.models.Tickets;
 import com.webmovieticket.repository.MoviesRepository;
+import com.webmovieticket.repository.TicketsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,9 @@ public class MoviesService  {
 
     @Autowired
     private MoviesRepository moviesRepository;
+
+    @Autowired
+    private TicketsRepository ticketsRepository;
 
     public List<MoviesDTO> findAll() {
         return moviesRepository.findAll().stream().map(
@@ -47,6 +52,7 @@ public class MoviesService  {
         return moviesMapper.toDto(moviesRepository.save(moviesMapper.update(oldMovies, movies)));
     }
 
+//    Xoá nhiều phim
     @Transactional
     public void delete(Long[] ids) {
         for (Long id : ids) {
@@ -54,8 +60,19 @@ public class MoviesService  {
         }
     }
 
+//    Xoá 1 phim
+
+//    Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException());
+//            for (JobPost jobPost : jobPostRepository.findAllByCompany(company)) {
+//        jobPostRepository.delete(jobPost);
+//    }
+//            companyRepository.deleteById(id);
     @Transactional
     public void deleteById(Long id) {
+        Movies movies = moviesRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        for (Tickets tickets : ticketsRepository.findAllByMovies(movies)) {
+            ticketsRepository.delete(tickets);
+        }
         moviesRepository.deleteById(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.webmovieticket.repository;
 
 import com.webmovieticket.dto.AuditDTO;
+import com.webmovieticket.models.Movies;
 import com.webmovieticket.models.Tickets;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,6 @@ public interface TicketsRepository extends JpaRepository<Tickets, Long> {
 
     @Query(value = "SELECT SUM(IF(tickets.payment_status = true, tickets.price, 0)) as sum_price, SUM(IF(tickets.payment_status = true, 1, 0)) as sum_tickets FROM tickets where tickets.movie_id = :movieId", nativeQuery = true)
     public List<Object[]> getAuditByMovie(@Param("movieId") Long movieId);
+
+    public List<Tickets> findAllByMovies(Movies movies);
 }
