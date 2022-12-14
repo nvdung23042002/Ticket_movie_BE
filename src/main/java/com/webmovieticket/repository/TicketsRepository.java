@@ -25,4 +25,7 @@ public interface TicketsRepository extends JpaRepository<Tickets, Long> {
     public List<Object[]> getAuditByMovie(@Param("movieId") Long movieId);
 
     public List<Tickets> findAllByMovies(Movies movies);
+
+    @Query(value = "SELECT * FROM tickets where tickets.cinema_id = :cinemaId and tickets.room_id = :roomId and tickets.show_date = :showDate and tickets.show_month = :showMonth and tickets.show_time = :showTime", nativeQuery = true)
+    public List<Tickets> getTicketsBySuatChieu(@Param("cinemaId") Long cinemaId, @Param("roomId") Long roomId, @Param("showDate") String showDate, @Param("showMonth") String showMonth, @Param("showTime") String showTime);
 }
