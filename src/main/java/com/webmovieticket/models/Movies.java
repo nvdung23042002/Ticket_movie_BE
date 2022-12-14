@@ -31,4 +31,7 @@ public class Movies extends BaseModel {
     private String language;
     private String movieDuration;
     private String rated;
+
+    private Integer sumPriceAudit = 0;
+    private Integer sumTicketAudit = 0;
 }

@@ -25,4 +25,7 @@ public class MoviesDTO extends BaseDTO {
     private String language;
     private String movieDuration;
     private String rated;
+
+    private Integer sumPriceAudit = 0;
+    private Integer sumTicketAudit = 0;
 }

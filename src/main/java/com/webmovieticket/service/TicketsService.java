@@ -42,8 +42,9 @@ public class TicketsService {
 //    Thêm vé cho 1 buổi xem phim.
     @Transactional
     public List<TicketsDTO> insert(Long cinemaId, Long roomId, Long movieId, String showDate, String showMonth, String showTime, String category, Integer price) {
-        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime);
-        if (oldTicketsDTOList.size() > 0) {
+//        List<TicketsDTO> oldTicketsDTOList = TicketsService.this.getTicket(cinemaId, roomId, movieId, showDate, showMonth, showTime);
+        List<Tickets> oldTickets = ticketsRepository.getTicketsBySuatChieu(cinemaId, roomId, showDate, showMonth, showTime);
+        if (oldTickets.size() > 0) {
             return null;
         }
         else {
