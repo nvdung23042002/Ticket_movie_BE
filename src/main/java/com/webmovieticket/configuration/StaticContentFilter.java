@@ -23,7 +23,7 @@ public class StaticContentFilter implements Filter {
     private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String path = request.getServletPath();
 
-        boolean isApi = path.startsWith("/api");
+        boolean isApi = path.startsWith("/test");
         boolean isResourceFile = !isApi && fileExtensions.stream().anyMatch(path::contains);
 
         if (isApi) {
@@ -49,11 +49,23 @@ public class StaticContentFilter implements Filter {
         if (resourcePath.endsWith(".html")) {
             response.setContentType("text/html");
         }
-        if (resourcePath.endsWith(".css")) {
+        else if (resourcePath.endsWith(".css")) {
             response.setContentType("text/css");
         }
-        if (resourcePath.endsWith(".js")) {
+        else if (resourcePath.endsWith(".js")) {
             response.setContentType("text/javascript");
+        }
+        else if (resourcePath.endsWith(".json")) {
+            response.setContentType("application/json");
+        }
+        else if (resourcePath.endsWith(".ico")) {
+            response.setContentType("image/vnd.microsoft.icon");
+        }
+        else if (resourcePath.endsWith(".png")) {
+            response.setContentType("image/png");
+        }
+        else if (resourcePath.endsWith(".txt")) {
+            response.setContentType("text/plain");
         }
 
         inputStream.transferTo(response.getOutputStream());
