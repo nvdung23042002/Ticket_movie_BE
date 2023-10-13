@@ -7,17 +7,13 @@ NHÓM 10 ĐIỂM
 
 **Thành viên:
 
-1.Nguyễn Vĩnh Dũng - 20021317
+1.Nguyễn Vĩnh Dũng - 20021317 (Leader)
 
 2.Lê Anh Tuấn - 20021464
 
 3.Nguyễn Duy Kiên - 20021379
 
-4.Nguyễn Văn Khánh - 20021375
-
-5.Nguyễn Thành Duy - 17021221
-
-6.Phạm Tuấn Anh - 20021293
+4.Phạm Tuấn Anh - 20021293
 
 **CÔNG NGHỆ SỬ DỤNG
 
